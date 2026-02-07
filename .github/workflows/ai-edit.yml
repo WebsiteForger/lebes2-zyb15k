@@ -54,7 +54,6 @@ jobs:
 
               # Step 3: Download images from the site (just images, skip JS/CSS/fonts)
               mkdir -p "reference/images"
-              # Extract image URLs from all downloaded HTML
               grep -ohP '(src|srcset)="(https?://[^"]*\.(jpg|jpeg|png|gif|svg|webp)[^"]*)"' reference/*.html 2>/dev/null | \
                 grep -oP 'https?://[^"]+' | sort -u | head -40 | while read IMG_URL; do
                   FNAME=$(basename "$IMG_URL" | cut -d'?' -f1 | head -c 80)
@@ -71,7 +70,10 @@ jobs:
           du -sh reference/ 2>/dev/null || true
 
       - name: Install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          # Gitignore reference/ BEFORE Claude runs so it won't commit scraped files
+          echo "reference/" >> .gitignore
 
       - name: Run Claude
         env:
@@ -79,22 +81,21 @@ jobs:
           PROMPT_TEXT: ${{ github.event.inputs.prompt }}
           MODEL_NAME: ${{ github.event.inputs.model }}
         run: |
-          claude --model "$MODEL_NAME" --dangerously-skip-permissions --max-turns 30 -p "
+          claude --model "$MODEL_NAME" --dangerously-skip-permissions --max-turns 50 -p "
           The user wants you to edit their website. Here is their request:
 
           $PROMPT_TEXT
 
           IMPORTANT INSTRUCTIONS:
-          1. Read CLAUDE.md first for the site editing rules.
+          1. Read CLAUDE.md first — it contains CRITICAL rules you must follow.
 
           2. If there is a reference/ directory, it contains a SCRAPED COPY of the user's
              existing site or reference site. READ EVERY HTML FILE in reference/ carefully.
              Extract ALL real content: text, headings, descriptions, addresses, phone numbers,
              apartment listings, team members, services, prices — EVERYTHING.
 
-          3. For images: check reference/ for downloaded images. Copy any useful images to the
-             site root (or an images/ folder). If images weren't downloaded, keep the original
-             URLs from the source site as img src (hotlink them).
+          3. For images: check reference/images/ for downloaded images. Copy them to the
+             site's images/ folder. If images weren't downloaded, hotlink the original URLs.
 
           4. If the user linked to an existing site to recreate:
              - You MUST reproduce ALL the content and functionality, not just the homepage
@@ -104,15 +105,30 @@ jobs:
              - If links go to external sites, keep those as external links
              - Recreate the COMPLETE site, not a summary of it
 
-          5. After making all changes, commit them with a descriptive message using git.
+          5. ABSOLUTE RULE — NO INCOMPLETE PAGES:
+             - NEVER create a page that says 'under construction' or 'coming soon'
+             - NEVER create stub/placeholder pages
+             - If you cannot fully complete a page with real content, DO NOT create it
+             - Remove incomplete pages from navigation entirely
+             - A missing page is 1000x better than a placeholder page
+             - Only link to pages that exist and are fully complete
+
+          6. UI QUALITY RULES:
+             - Navbar must be flush to the very top of the page (top-0, no gaps/margins)
+             - Dropdown menus MUST work on hover — nest the dropdown inside the trigger's
+               parent element so the hover state stays active when moving to dropdown items.
+               Use Tailwind group/group-hover. NO gap between trigger and dropdown content.
+             - Every interaction must work: hovers, clicks, dropdowns, mobile menu
+             - Test every link points to a real, complete page
+
+          7. After making all changes, commit them with a descriptive message using git.
+             Do NOT commit the reference/ directory.
           "
 
       - name: Push changes
         run: |
           git config user.name "claude[bot]"
           git config user.email "noreply@anthropic.com"
-          # Don't push the reference/ scrape folder
-          echo "reference/" >> .gitignore
           git add -A
           git diff --staged --quiet || git commit -m "AI edit via SiteForge"
           git push
