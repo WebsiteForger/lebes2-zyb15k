@@ -25,14 +25,12 @@ jobs:
       - name: Scrape reference sites
         run: |
           mkdir -p reference
-          # Extract URLs from the prompt
           URLS=$(echo "${{ github.event.inputs.prompt }}" | grep -oP 'https?://[^\s"'"'"'<>]+' || true)
           if [ -n "$URLS" ]; then
             for URL in $URLS; do
               DOMAIN=$(echo "$URL" | sed 's|https\?://||' | sed 's|/.*||')
               echo "Scraping $URL (domain: $DOMAIN)..."
               mkdir -p "reference/$DOMAIN"
-              # Mirror the site: follow links within same domain, download images, CSS, JS
               wget --mirror --convert-links --adjust-extension --page-requisites \
                 --no-parent --timeout=10 --tries=2 --wait=0.5 \
                 --directory-prefix="reference" \
@@ -44,12 +42,10 @@ jobs:
               echo "Files downloaded:"
               find "reference/" -type f | head -50
             done
-            # Also dump raw HTML for each page for easy reading
             for URL in $URLS; do
               echo "---"
               echo "Fetching clean HTML: $URL"
               curl -sL "$URL" > "reference/main-page.html" 2>/dev/null || true
-              # Try to find subpages from the main page
               SUBPAGES=$(curl -sL "$URL" | grep -oP 'href="(/[^"]*)"' | sed 's/href="//;s/"//' | sort -u | head -20)
               for SUB in $SUBPAGES; do
                 SAFE_NAME=$(echo "$SUB" | tr '/' '_')
@@ -100,7 +96,6 @@ jobs:
         run: |
           git config user.name "claude[bot]"
           git config user.email "noreply@anthropic.com"
-          # Don't push the reference/ scrape folder
           echo "reference/" >> .gitignore
           git add -A
           git diff --staged --quiet || git commit -m "AI edit via SiteForge"
