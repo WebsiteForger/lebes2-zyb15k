@@ -3,177 +3,368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt - Glebes Fastighets AB</title>
+    <title>Kontakta Glebes i Kalmar | Glebes</title>
     <meta name="description" content="Kontakta oss på Glebes för fastighetsfrågor, offertförfrågningar eller för att diskutera ditt nästa byggprojekt. Vi hörs!">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-link {
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-menu.active {
+            max-height: 100vh;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
 
-    <!-- Simple Header -->
+    <!-- Navigation -->
     <nav class="bg-gray-900 text-white fixed w-full z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html">
-                    <img src="images/glebe_logo_g_white.png" alt="Glebes" class="h-10 w-auto">
-                </a>
-                <a href="index.html" class="text-blue-400 hover:text-blue-300">← Tillbaka till startsidan</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html">
+                        <img src="images/glebe_logo_g_white.png" alt="Glebes" class="h-12 w-auto">
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <div class="relative group">
+                        <a href="#fastighet" class="nav-link hover:text-blue-400">Fastighet</a>
+                        <div class="absolute hidden group-hover:block bg-gray-800 mt-2 py-2 w-48 rounded shadow-xl">
+                            <a href="lediga-lagenheter.html" class="block px-4 py-2 hover:bg-gray-700">Lediga lägenheter</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="#bygg" class="nav-link hover:text-blue-400">Bygg</a>
+                        <div class="absolute hidden group-hover:block bg-gray-800 mt-2 py-2 w-56 rounded shadow-xl">
+                            <a href="byggservice.html" class="block px-4 py-2 hover:bg-gray-700">Byggservice</a>
+                            <a href="#badrum-kok" class="block px-4 py-2 hover:bg-gray-700 pl-8">Badrum & kök</a>
+                            <a href="#tak-fasad" class="block px-4 py-2 hover:bg-gray-700 pl-8">Tak & fasad</a>
+                            <a href="#puts-murning" class="block px-4 py-2 hover:bg-gray-700 pl-8">Puts & murning</a>
+                            <a href="#attefall-garage" class="block px-4 py-2 hover:bg-gray-700 pl-8">Attefall & garage</a>
+                            <a href="#kakel-klinker" class="block px-4 py-2 hover:bg-gray-700 pl-8">Kakel & klinker</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="entreprenad.html" class="nav-link hover:text-blue-400">Entreprenad</a>
+                        <div class="absolute hidden group-hover:block bg-gray-800 mt-2 py-2 w-64 rounded shadow-xl">
+                            <a href="#totalentreprenad" class="block px-4 py-2 hover:bg-gray-700">Totalentreprenad</a>
+                            <a href="#generalentreprenad" class="block px-4 py-2 hover:bg-gray-700">Generalentreprenad</a>
+                            <a href="#utforandeentreprenad" class="block px-4 py-2 hover:bg-gray-700">Utförandeentreprenad</a>
+                            <a href="#delad-entreprenad" class="block px-4 py-2 hover:bg-gray-700">Delad entreprenad</a>
+                            <a href="#samverkansentreprenad" class="block px-4 py-2 hover:bg-gray-700">Samverkansentreprenad</a>
+                            <a href="projekt.html" class="block px-4 py-2 hover:bg-gray-700">Projekt</a>
+                        </div>
+                    </div>
+                    <a href="aktuellt.html" class="nav-link hover:text-blue-400">Aktuellt</a>
+                    <div class="relative group">
+                        <a href="om-glebes.html" class="nav-link hover:text-blue-400">Om oss</a>
+                        <div class="absolute hidden group-hover:block bg-gray-800 mt-2 py-2 w-48 rounded shadow-xl">
+                            <a href="jobba-hos-glebe.html" class="block px-4 py-2 hover:bg-gray-700">Jobba hos Glebes</a>
+                            <a href="hallbarhetspolicy.html" class="block px-4 py-2 hover:bg-gray-700">Hållbarhetspolicy</a>
+                        </div>
+                    </div>
+                    <a href="kontakt.html" class="nav-link hover:text-blue-400">Kontakt</a>
+                    <a href="https://glebe.minasidor.pigello.io/" target="_blank" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition">
+                        Mina sidor
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="lg:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#fastighet" class="block px-3 py-2 hover:bg-gray-700 rounded">Fastighet</a>
+                    <a href="lediga-lagenheter.html" class="block px-6 py-2 text-sm hover:bg-gray-700 rounded">Lediga lägenheter</a>
+                    <a href="#bygg" class="block px-3 py-2 hover:bg-gray-700 rounded">Bygg</a>
+                    <a href="byggservice.html" class="block px-6 py-2 text-sm hover:bg-gray-700 rounded">Byggservice</a>
+                    <a href="entreprenad.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Entreprenad</a>
+                    <a href="aktuellt.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Aktuellt</a>
+                    <a href="om-glebes.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Om oss</a>
+                    <a href="kontakt.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Kontakt</a>
+                    <a href="https://glebe.minasidor.pigello.io/" target="_blank" class="block px-3 py-2 bg-blue-600 rounded mt-2">Mina sidor</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="pt-24 pb-16">
+    <!-- Page Header -->
+    <section class="bg-gradient-to-br from-blue-50 to-gray-50 py-20 mt-20">
         <div class="max-w-6xl mx-auto px-4">
-            <h1 class="text-5xl font-bold mb-8">Kontakt</h1>
-            
-            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mb-8">
-                <p class="font-semibold mb-4">Är du hyresgäst och vill komma i kontakt med oss? <strong>Läs igenom texten först!</strong></p>
-                <ul class="space-y-2 text-gray-700">
-                    <li>• Är du intresserad av att söka en lägenhet hos oss, använd vår <a href="https://www.homeq.se/p/glebes-fastighets-ab" target="_blank" class="text-blue-600 underline">bostadsportal HomeQ</a>.</li>
-                    <li>• För att anmäla service eller fel behöver du logga in på <a href="https://glebe.minasidor.pigello.io/" target="_blank" class="text-blue-600 underline">Mina sidor</a> och använda funktionen <strong>Serviceanmälan</strong>.</li>
-                    <li>• Vill du komma i kontakt med din fastighetsskötare finns kontaktuppgifter på Mina sidor. Obs! En serviceanmälan kan inte göras direkt till våra fastighetsskötare utan behöver göras på Mina sidor.</li>
-                </ul>
-            </div>
-
-            <!-- Main Office Info -->
-            <div class="bg-gray-50 p-8 rounded-lg mb-12">
-                <h2 class="text-3xl font-bold mb-4">GLEBES</h2>
-                <p class="text-lg text-gray-700">
-                    Bygg, fastighet och förvaltning<br>
-                    Kom snart igen 1, 392 31 Kalmar<br>
-                    Tfn: <a href="tel:0480-44 44 90" class="text-blue-600 hover:underline">0480-44 44 90</a>
-                </p>
-                <p class="mt-4 text-gray-600">(Öppet 8:00-12:00 mån-fre)</p>
-            </div>
-
-            <!-- Team: Bygg och Projekt -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold mb-8">Kontakt byggtjänster och projekt</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Andre_Ohlon_Vikestam-e1731493323488-720x720.jpg" alt="André Ohlsson Vikestam" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">André Ohlsson Vikestam</h3>
-                        <p class="text-gray-600 text-center mb-3">Avdelningschef Bygg/kalkyl</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:andre@glebe.se" class="text-blue-600 hover:underline">andre@glebe.se</a></p>
-                            <p><a href="tel:070-713 45 06" class="text-blue-600 hover:underline">Tel: 070-713 45 06</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Daniel_Svanholm-e1731493275467-720x720.jpg" alt="Daniel Svanholm" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Daniel Svanholm</h3>
-                        <p class="text-gray-600 text-center mb-3">Projektledare/kalkyl</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:daniel@glebe.se" class="text-blue-600 hover:underline">daniel@glebe.se</a></p>
-                            <p><a href="tel:070-713 45 16" class="text-blue-600 hover:underline">Tel: 070-713 45 16</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Niklas_Polteg-e1731493159590-720x720.jpg" alt="Niklas Polteg" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Niklas Polteg</h3>
-                        <p class="text-gray-600 text-center mb-3">Projektledare/kalkyl</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:niklas@glebe.se" class="text-blue-600 hover:underline">niklas@glebe.se</a></p>
-                            <p><a href="tel:070-713 45 18" class="text-blue-600 hover:underline">Tel: 070-713 45 18</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Niclas_Lindqvist-e1731492889680-720x720.jpg" alt="Niclas Lindqvist" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Niclas Lindqvist</h3>
-                        <p class="text-gray-600 text-center mb-3">Projektledare/kalkyl</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:niclas.lindqvist@glebe.se" class="text-blue-600 hover:underline">niclas.lindqvist@glebe.se</a></p>
-                            <p><a href="tel:070-713 44 92" class="text-blue-600 hover:underline">Tel: 070-713 44 92</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Ove_1000x1000-720x720.jpg" alt="Ove Nilsson" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Ove Nilsson</h3>
-                        <p class="text-gray-600 text-center mb-3">Byggservice</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:ove.nilsson@glebe.se" class="text-blue-600 hover:underline">ove.nilsson@glebe.se</a></p>
-                            <p><a href="tel:070-713 44 76" class="text-blue-600 hover:underline">Tel: 070-713 44 76</a></p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Team: Fastigheter -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold mb-8">Kontakt Fastigheter</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter_3-720x720.jpg" alt="Fredrik Eriksson" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Fredrik Eriksson</h3>
-                        <p class="text-gray-600 text-center mb-3">Avdelningschef Fastighet</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:fredrik@glebe.se" class="text-blue-600 hover:underline">fredrik@glebe.se</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter-720x720.jpg" alt="Krister Fagerström" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Krister Fagerström</h3>
-                        <p class="text-gray-600 text-center mb-3">Driftansvarig</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:krister@glebe.se" class="text-blue-600 hover:underline">krister@glebe.se</a></p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Team: Verksamhetsledning -->
-            <div class="mb-16">
-                <h2 class="text-3xl font-bold mb-8">Verksamhetsledning</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter_2-720x720.jpg" alt="Hannes Liedstrand" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Hannes Liedstrand</h3>
-                        <p class="text-gray-600 text-center mb-3">CFO</p>
-                        <div class="text-center space-y-2">
-                            <p><a href="mailto:hannes@glebe.se" class="text-blue-600 hover:underline">hannes@glebe.se</a></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white border rounded-lg p-6 hover:shadow-lg transition">
-                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_Carl-Johan-720x720.jpg" alt="Carl-Johan Glebe" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                        <h3 class="text-xl font-semibold text-center">Carl-Johan Glebe</h3>
-                        <p class="text-gray-600 text-center mb-3">CEO</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Office Image -->
-            <div class="mt-12">
-                <img src="https://glebe.se/app/uploads/2025/06/Bild-exteriort_kontakt-1024x682.jpg" alt="Glebes kontor i Kalmar" class="w-full rounded-lg shadow-lg">
-            </div>
-
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Kontakt</h1>
+            <p class="text-xl text-gray-700">Vi är här för att hjälpa dig. Kontakta oss med frågor om fastigheter, byggtjänster eller entreprenad.</p>
         </div>
-    </main>
+    </section>
+
+    <!-- Main Content -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold mb-4">Viktig information för hyresgäster</h2>
+            <p class="text-lg text-gray-700 mb-6">Är du hyresgäst och vill komma i kontakt med oss? <strong>Läs igenom texten först!</strong></p>
+            <ul class="space-y-4 text-lg text-gray-700">
+                <li class="flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Är du intresserad av att söka en lägenhet hos oss, använd vår <a href="lediga-lagenheter.html" class="text-blue-600 hover:text-blue-700 underline">bostadsportal HomeQ</a>.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>För att anmäla service eller fel behöver du logga in på <a href="https://portal.pigello.se/glebes" target="_blank" class="text-blue-600 hover:text-blue-700 underline">Mina sidor</a> och använda funktionen <strong>Serviceanmälan</strong>.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg class="w-6 h-6 text-blue-600 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Vill du komma i kontakt med din fastighetsskötare finns kontaktuppgifter på Mina sidor. Obs! En serviceanmälan kan inte göras direkt utan behöver göras på <a href="https://portal.pigello.se/glebes" target="_blank" class="text-blue-600 hover:text-blue-700 underline">Mina sidor</a>.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Office Info -->
+        <div class="bg-gray-50 p-8 rounded-lg mb-12">
+            <h3 class="text-2xl font-bold mb-4">GLEBES - Bygg, fastighet och förvaltning</h3>
+            <div class="text-lg text-gray-700 space-y-2">
+                <p>Kom snart igen 1</p>
+                <p>392 31 Kalmar</p>
+                <p><a href="tel:0480-44 44 90" class="text-blue-600 hover:text-blue-700 font-bold">0480-44 44 90</a></p>
+                <p class="pt-2"><strong>Öppet:</strong> 8:00-12:00 mån-fre</p>
+            </div>
+        </div>
+
+        <!-- Google Maps -->
+        <div class="mb-12 rounded-lg overflow-hidden shadow-lg">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2164.5123456789!2d16.2587!3d56.6526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465be0c0d0d0d0d1%3A0x0!2sKom%20snart%20igen%201%2C%20392%2031%20Kalmar!5e0!3m2!1ssv!2sse!4v1234567890123" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Building Contact Section -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Kontakt Byggkontakt och projekt</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- André Ohlsson Vikestam -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Andre_Ohlon_Vikestam-e1731493323488-720x720.jpg" alt="André Ohlsson Vikestam" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">André Ohlsson Vikestam</h3>
+                    <p class="text-gray-600 mb-4">Avdelningschef Bygg/kalkyl</p>
+                    <div class="space-y-2">
+                        <p><a href="mailto:andre@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">andre@glebe.se</a></p>
+                        <p><a href="tel:0707134506" class="text-blue-600 hover:text-blue-700 font-medium">070-713 45 06</a></p>
+                    </div>
+                </div>
+
+                <!-- Daniel Svanholm -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Daniel_Svanholm-e1731493275467-720x720.jpg" alt="Daniel Svanholm" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Daniel Svanholm</h3>
+                    <p class="text-gray-600 mb-4">Projektledare/kalkyl</p>
+                    <div class="space-y-2">
+                        <p><a href="mailto:daniel@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">daniel@glebe.se</a></p>
+                        <p><a href="tel:0707134516" class="text-blue-600 hover:text-blue-700 font-medium">070-713 45 16</a></p>
+                    </div>
+                </div>
+
+                <!-- Niklas Polteg -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Niklas_Polteg-e1731493159590-720x720.jpg" alt="Niklas Polteg" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Niklas Polteg</h3>
+                    <p class="text-gray-600 mb-4">Projektledare/kalkyl</p>
+                    <div class="space-y-2">
+                        <p><a href="mailto:niklas@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">niklas@glebe.se</a></p>
+                        <p><a href="tel:0707134518" class="text-blue-600 hover:text-blue-700 font-medium">070-713 45 18</a></p>
+                    </div>
+                </div>
+
+                <!-- Niclas Lindqvist -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Niclas_Lindqvist-e1731492889680-720x720.jpg" alt="Niclas Lindqvist" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Niclas Lindqvist</h3>
+                    <p class="text-gray-600 mb-4">Projektledare/kalkyl</p>
+                    <div class="space-y-2">
+                        <p><a href="mailto:niclas.lindqvist@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">niclas.lindqvist@glebe.se</a></p>
+                        <p><a href="tel:0707134492" class="text-blue-600 hover:text-blue-700 font-medium">070-713 44 92</a></p>
+                    </div>
+                </div>
+
+                <!-- Ove Nilsson -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2023/11/Glebes_kontakt_Ove_1000x1000-720x720.jpg" alt="Ove Nilsson" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Ove Nilsson</h3>
+                    <p class="text-gray-600 mb-4">Byggservice</p>
+                    <div class="space-y-2">
+                        <p><a href="mailto:ove.nilsson@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">ove.nilsson@glebe.se</a></p>
+                        <p><a href="tel:0707134476" class="text-blue-600 hover:text-blue-700 font-medium">070-713 44 76</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Management Contact Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Kontakt Fastigheter</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                <!-- Fredrik Eriksson -->
+                <div class="bg-white rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter_3-720x720.jpg" alt="Fredrik Eriksson" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Fredrik Eriksson</h3>
+                    <p class="text-gray-600 mb-4">Avdelningschef Fastighet</p>
+                    <p><a href="mailto:fredrik@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">fredrik@glebe.se</a></p>
+                </div>
+
+                <!-- Krister Fagerström -->
+                <div class="bg-white rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter-720x720.jpg" alt="Krister Fagerström" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Krister Fagerström</h3>
+                    <p class="text-gray-600 mb-4">Driftansvarig</p>
+                    <p><a href="mailto:krister@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">krister@glebe.se</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Management Contact Section -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Verksamhetsledning</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                <!-- Hannes Liedstrand -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_kontakt_fastigheter_2-720x720.jpg" alt="Hannes Liedstrand" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Hannes Liedstrand</h3>
+                    <p class="text-gray-600 mb-4">CFO</p>
+                    <p><a href="mailto:hannes@glebe.se" class="text-blue-600 hover:text-blue-700 font-medium">hannes@glebe.se</a></p>
+                </div>
+
+                <!-- Carl-Johan Glebe -->
+                <div class="bg-gray-50 rounded-lg p-8 text-center hover:shadow-lg transition">
+                    <div class="bg-gray-300 h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://glebe.se/app/uploads/2025/06/Glebes_Carl-Johan-720x720.jpg" alt="Carl-Johan Glebe" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1">Carl-Johan Glebe</h3>
+                    <p class="text-gray-600 mb-4">CEO</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400">© 2017-2024 Glebes Fastighets AB - Alla rättigheter reserverade.</p>
-            <p class="mt-2"><a href="index.html" class="text-blue-400 hover:text-blue-300">Tillbaka till startsidan</a></p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <img src="images/glebe-logo-white-long.png" alt="Glebes" class="h-10 mb-4">
+                    <p class="mb-4">Vi bygger, förvaltar och hyr ut.</p>
+                    <p class="text-sm text-gray-400">
+                        Adress: Kom snart igen 1<br>
+                        392 31 Kalmar<br>
+                        <a href="tel:0480-44 44 90" class="hover:text-blue-400">0480-44 44 90</a>
+                    </p>
+                </div>
+
+                <!-- Links Column 1 -->
+                <div>
+                    <ul class="space-y-2">
+                        <li><a href="#fastighet" class="hover:text-blue-400">Fastighet</a></li>
+                        <li><a href="byggservice.html" class="hover:text-blue-400">Byggservice</a></li>
+                        <li><a href="entreprenad.html" class="hover:text-blue-400">Entreprenad</a></li>
+                        <li><a href="lediga-lagenheter.html" class="hover:text-blue-400">Lediga lägenheter</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 2 -->
+                <div>
+                    <ul class="space-y-2">
+                        <li><a href="kontakt.html" class="hover:text-blue-400">Kontakt</a></li>
+                        <li><a href="om-glebes.html" class="hover:text-blue-400">Om oss</a></li>
+                        <li><a href="projekt.html" class="hover:text-blue-400">Projekt</a></li>
+                        <li><a href="jobba-hos-glebe.html" class="hover:text-blue-400">Jobba hos oss</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 3 -->
+                <div>
+                    <ul class="space-y-2">
+                        <li><a href="https://glebe.minasidor.pigello.io/" target="_blank" class="hover:text-blue-400">Mina sidor</a></li>
+                        <li><a href="hallbarhetspolicy.html" class="hover:text-blue-400">Hållbarhetspolicy</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Cookiepolicy</a></li>
+                        <li><a href="#" class="hover:text-blue-400">Integritetspolicy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Partner Logos -->
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-wrap justify-center items-center gap-8 mb-6">
+                    <a href="https://destinationkalmar.se/partnership/" target="_blank">
+                        <img src="https://glebe.se/app/uploads/2024/10/partnership-kalmar.png" alt="Partnership by Kalmar" class="h-16 opacity-70 hover:opacity-100 transition">
+                    </a>
+                    <a href="https://www.barncancerfonden.se" target="_blank">
+                        <img src="https://glebe.se/app/uploads/2024/12/Skarmavbild-2024-12-05-kl.-14.48.42.png" alt="Barncancerfonden" class="h-16 opacity-70 hover:opacity-100 transition">
+                    </a>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-center text-sm text-gray-400">
+                    <p>© 2017-2024 Glebes Fastighets AB - Alla rättigheter reserverade.</p>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 
 </body>
 </html>

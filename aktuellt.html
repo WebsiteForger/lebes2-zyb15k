@@ -3,35 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glebes Fastighets AB</title>
+    <title>Aktuellt - Nyheter från Glebes | Glebes</title>
+    <meta name="description" content="Läs de senaste nyheterna från Glebes - 80-årsjubileum, personalnyheter, och viktiga uppdateringar.">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link { transition: all 0.2s ease; }
+        .nav-link:hover { color: #3b82f6; }
+        .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .mobile-menu.active { max-height: 100vh; }
+    </style>
 </head>
 <body class="bg-white text-gray-900">
+
     <nav class="bg-gray-900 text-white fixed w-full z-50 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html"><img src="images/glebe_logo_g_white.png" alt="Glebes" class="h-10 w-auto"></a>
-                <a href="index.html" class="text-blue-400 hover:text-blue-300">← Tillbaka till startsidan</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0"><a href="index.html"><img src="images/glebe_logo_g_white.png" alt="Glebes" class="h-12 w-auto"></a></div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#fastighet" class="nav-link hover:text-blue-400">Fastighet</a>
+                    <a href="bygg.html" class="nav-link hover:text-blue-400">Bygg</a>
+                    <a href="entreprenad.html" class="nav-link hover:text-blue-400">Entreprenad</a>
+                    <a href="aktuellt.html" class="nav-link hover:text-blue-400">Aktuellt</a>
+                    <a href="om-glebes.html" class="nav-link hover:text-blue-400">Om oss</a>
+                    <a href="kontakt.html" class="nav-link hover:text-blue-400">Kontakt</a>
+                    <a href="https://glebe.minasidor.pigello.io/" target="_blank" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded transition">Mina sidor</a>
+                </div>
+                <button id="mobile-menu-button" class="lg:hidden p-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
             </div>
+            <div id="mobile-menu" class="mobile-menu lg:hidden"><div class="px-2 pt-2 pb-3 space-y-1"><a href="aktuellt.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Aktuellt</a><a href="om-glebes.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Om oss</a><a href="kontakt.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Kontakt</a><a href="https://glebe.minasidor.pigello.io/" target="_blank" class="block px-3 py-2 bg-blue-600 rounded mt-2">Mina sidor</a></div></div>
         </div>
     </nav>
-    <main class="pt-32 pb-16 min-h-screen">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h1 class="text-5xl font-bold mb-6">Glebes Fastighets AB</h1>
-            <p class="text-xl text-gray-700 mb-8">
-                Denna sida är under uppbyggnad. Besök vår startsida för mer information om Glebes.
+
+    <section class="bg-gradient-to-br from-blue-50 to-gray-50 py-20 mt-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Aktuellt</h1>
+            <p class="text-xl text-gray-700">Nyheter och uppdateringar från Glebes</p>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 py-16">
+        <div class="space-y-8 mb-12">
+            <!-- Jubileum News -->
+            <article class="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Glebes firar 80 år</h2>
+                    <span class="text-sm text-gray-600">November 2024</span>
+                </div>
+                <p class="text-lg text-gray-700 mb-4">
+                    I november 2024 firade vi på Glebes 80 år av kvalitet, lokal förankring och engagemang! Sedan 1944 har vi varit en trygg partner inom bygg- och fastighetsbranschen i Kalmar med omnejd.
+                </p>
+                <p class="text-gray-700">
+                    Vi tackar våra kunder, samarbetspartners och medarbetare för dessa fantastiska år. Nu, över 80 år senare, står vi fortfarande starka och redo att möta nya utmaningar tillsammans med er!
+                </p>
+            </article>
+
+            <!-- Staff News -->
+            <article class="bg-green-50 border-l-4 border-green-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Välkommen nya teammedlemmar</h2>
+                    <span class="text-sm text-gray-600">2024</span>
+                </div>
+                <p class="text-lg text-gray-700">
+                    Vi är glada att presentera nya medlemmar i vårt team! Med växande projekt och ökande efterfrågan söker vi hela tiden talangfulla människor som vill vara del av vår framgångsrika organisation. Är du intresserad av att jobba hos oss?
+                </p>
+            </article>
+
+            <!-- Office Closure -->
+            <article class="bg-yellow-50 border-l-4 border-yellow-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Kontorsöppettider under helgdagar</h2>
+                    <span class="text-sm text-gray-600">Årligt</span>
+                </div>
+                <p class="text-lg text-gray-700 mb-4">
+                    Glebes kontor stänger under vissa helgdagar. Vi öppnar normalt igen dagen efter. För brådskande ärenden kontakta vår jour.
+                </p>
+                <p class="text-gray-700">
+                    Vi önskar er en skön helg och ser gärna av er igen när vi öppnar!
+                </p>
+            </article>
+
+            <!-- Feature News -->
+            <article class="bg-purple-50 border-l-4 border-purple-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Glebes i mediaspotlighten</h2>
+                    <span class="text-sm text-gray-600">2024</span>
+                </div>
+                <p class="text-lg text-gray-700 mb-4">
+                    Glebes har uppmärksammats i media för sitt engagemang i Kalmar Energi Draken-projektet. En av vår största och mest ambitiösa satsningar som visar vad vi kan åstadkomma tillsammans.
+                </p>
+                <p class="text-gray-700">
+                    Vi är stolta över att kunna bidra till utvecklingen av Kalmar och önskar lycka till med denna spännande infrastrukturinvestering.
+                </p>
+            </article>
+
+            <!-- Sustainability News -->
+            <article class="bg-blue-50 border-l-4 border-blue-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">100% förnybar energi</h2>
+                    <span class="text-sm text-gray-600">Pågående</span>
+                </div>
+                <p class="text-lg text-gray-700 mb-4">
+                    Vi fortsätter att investera i förnybar energi. Vår egna vindkraft producerar 500-800 MWh per år, och vi expanderar vår solkraftinstallation.
+                </p>
+                <p class="text-gray-700">
+                    Glebes är engagerat i att skapa en bättre framtid med hållbar energi och miljömedvetna byggmetoder.
+                </p>
+            </article>
+
+            <!-- Expansion News -->
+            <article class="bg-red-50 border-l-4 border-red-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Expansion av fastighetsportföljen</h2>
+                    <span class="text-sm text-gray-600">2024</span>
+                </div>
+                <p class="text-lg text-gray-700">
+                    Glebes fortsätter att växa. Vi har förvärvat och utvecklat nya fastigheter på strategiska lägen i Kalmar. Denna expansion möjliggör att vi kan erbjuda fler hem till vår växande hyresgästkår.
+                </p>
+            </article>
+
+            <!-- Community News -->
+            <article class="bg-indigo-50 border-l-4 border-indigo-600 p-8 rounded-lg hover:shadow-lg transition">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-2xl font-bold">Glebes stöder Kalmarsamhället</h2>
+                    <span class="text-sm text-gray-600">Löpande</span>
+                </div>
+                <p class="text-lg text-gray-700">
+                    Som ett familjeägt företag är vi engagerade i att stödja vår lokala gemenskap. Vi samarbetar med olika organisationer och bidrar till utvecklingen av Kalmar kommun.
+                </p>
+            </article>
+        </div>
+
+        <!-- Newsletter CTA -->
+        <div class="bg-gray-50 p-8 rounded-lg text-center">
+            <h3 class="text-2xl font-bold mb-4">Vill du få nyheter från Glebes?</h3>
+            <p class="text-lg text-gray-700 mb-6">
+                Kontakta oss för att få uppdateringar om våra projekt och initiativ.
             </p>
-            <a href="index.html" class="inline-block bg-blue-600 text-white px-8 py-4 rounded hover:bg-blue-700 transition font-medium">
-                Gå till startsidan
+            <a href="kontakt.html" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition font-medium">
+                Kontakta oss
             </a>
         </div>
-    </main>
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400">© 2017-2024 Glebes Fastighets AB</p>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <img src="images/glebe-logo-white-long.png" alt="Glebes" class="h-10 mb-4">
+                    <p class="mb-4">Vi bygger, förvaltar och hyr ut.</p>
+                    <p class="text-sm text-gray-400">
+                        Adress: Kom snart igen 1<br>
+                        392 31 Kalmar<br>
+                        <a href="tel:0480-44 44 90" class="hover:text-blue-400">0480-44 44 90</a>
+                    </p>
+                </div>
+                <div><ul class="space-y-2"><li><a href="#fastighet" class="hover:text-blue-400">Fastighet</a></li><li><a href="byggservice.html" class="hover:text-blue-400">Byggservice</a></li><li><a href="entreprenad.html" class="hover:text-blue-400">Entreprenad</a></li><li><a href="lediga-lagenheter.html" class="hover:text-blue-400">Lediga lägenheter</a></li></ul></div>
+                <div><ul class="space-y-2"><li><a href="kontakt.html" class="hover:text-blue-400">Kontakt</a></li><li><a href="om-glebes.html" class="hover:text-blue-400">Om oss</a></li><li><a href="projekt.html" class="hover:text-blue-400">Projekt</a></li><li><a href="jobba-hos-glebe.html" class="hover:text-blue-400">Jobba hos oss</a></li></ul></div>
+                <div><ul class="space-y-2"><li><a href="https://glebe.minasidor.pigello.io/" target="_blank" class="hover:text-blue-400">Mina sidor</a></li><li><a href="hallbarhetspolicy.html" class="hover:text-blue-400">Hållbarhetspolicy</a></li><li><a href="#" class="hover:text-blue-400">Cookiepolicy</a></li><li><a href="#" class="hover:text-blue-400">Integritetspolicy</a></li></ul></div>
+            </div>
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-wrap justify-center items-center gap-8 mb-6">
+                    <a href="https://destinationkalmar.se/partnership/" target="_blank">
+                        <img src="https://glebe.se/app/uploads/2024/10/partnership-kalmar.png" alt="Partnership by Kalmar" class="h-16 opacity-70 hover:opacity-100 transition">
+                    </a>
+                    <a href="https://www.barncancerfonden.se" target="_blank">
+                        <img src="https://glebe.se/app/uploads/2024/12/Skarmavbild-2024-12-05-kl.-14.48.42.png" alt="Barncancerfonden" class="h-16 opacity-70 hover:opacity-100 transition">
+                    </a>
+                </div>
+                <div class="text-center text-sm text-gray-400">
+                    <p>© 2017-2024 Glebes Fastighets AB - Alla rättigheter reserverade.</p>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+
 </body>
 </html>
