@@ -24,28 +24,30 @@ jobs:
 
       - name: Scrape reference sites
         timeout-minutes: 5
+        env:
+          PROMPT_TEXT: ${{ github.event.inputs.prompt }}
         run: |
           mkdir -p reference
           # Extract URLs from the prompt
-          URLS=\$(echo "\${{ github.event.inputs.prompt }}" | grep -oP 'https?://[^\\s"'"'"'<>]+' || true)
-          if [ -n "\$URLS" ]; then
-            for URL in \$URLS; do
-              DOMAIN=\$(echo "\$URL" | sed 's|https\\?://||' | sed 's|/.*||')
-              echo "Scraping \$URL ..."
+          URLS=$(echo "$PROMPT_TEXT" | grep -oP 'https?://[^\s"'"'"'<>]+' || true)
+          if [ -n "$URLS" ]; then
+            for URL in $URLS; do
+              DOMAIN=$(echo "$URL" | sed 's|https\?://||' | sed 's|/.*||')
+              echo "Scraping $URL ..."
 
               # Step 1: Fetch main page and discover all internal links
-              curl -sL "\$URL" > "reference/main-page.html" 2>/dev/null || true
-              SUBPAGES=\$(curl -sL "\$URL" | grep -oP 'href="(https?://'""\$DOMAIN""'[^"]*|/[^"]*)"' | sed 's/href="//;s/"//' | sort -u | head -30)
+              curl -sL "$URL" > "reference/main-page.html" 2>/dev/null || true
+              SUBPAGES=$(curl -sL "$URL" | grep -oP 'href="(https?://'"$DOMAIN"'[^"]*|/[^"]*)"' | sed 's/href="//;s/"//' | sort -u | head -30)
 
               # Step 2: Fetch each subpage HTML
-              for SUB in \$SUBPAGES; do
-                case "\$SUB" in
-                  http*) FULL_URL="\$SUB" ;;
-                  *)     FULL_URL="\$URL\$SUB" ;;
+              for SUB in $SUBPAGES; do
+                case "$SUB" in
+                  http*) FULL_URL="$SUB" ;;
+                  *)     FULL_URL="$URL$SUB" ;;
                 esac
-                SAFE_NAME=\$(echo "\$SUB" | tr '/:?&#' '______' | head -c 100)
-                echo "  Fetching: \$FULL_URL"
-                curl -sL --max-time 8 "\$FULL_URL" > "reference/page_\$SAFE_NAME.html" 2>/dev/null || true
+                SAFE_NAME=$(echo "$SUB" | tr '/:?&#' '______' | head -c 100)
+                echo "  Fetching: $FULL_URL"
+                curl -sL --max-time 8 "$FULL_URL" > "reference/page_$SAFE_NAME.html" 2>/dev/null || true
               done
 
               # Step 3: Download images from the site (just images, skip JS/CSS/fonts)
@@ -53,12 +55,12 @@ jobs:
               # Extract image URLs from all downloaded HTML
               grep -ohP '(src|srcset)="(https?://[^"]*\.(jpg|jpeg|png|gif|svg|webp)[^"]*)"' reference/*.html 2>/dev/null | \
                 grep -oP 'https?://[^"]+' | sort -u | head -40 | while read IMG_URL; do
-                  FNAME=\$(basename "\$IMG_URL" | cut -d'?' -f1 | head -c 80)
-                  echo "  Image: \$FNAME"
-                  curl -sL --max-time 5 "\$IMG_URL" -o "reference/images/\$FNAME" 2>/dev/null || true
+                  FNAME=$(basename "$IMG_URL" | cut -d'?' -f1 | head -c 80)
+                  echo "  Image: $FNAME"
+                  curl -sL --max-time 5 "$IMG_URL" -o "reference/images/$FNAME" 2>/dev/null || true
                 done
 
-              echo "Done scraping \$DOMAIN"
+              echo "Done scraping $DOMAIN"
             done
           fi
           echo "=== Reference files ==="
@@ -71,12 +73,14 @@ jobs:
 
       - name: Run Claude
         env:
-          ANTHROPIC_API_KEY: \${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PROMPT_TEXT: ${{ github.event.inputs.prompt }}
+          MODEL_NAME: ${{ github.event.inputs.model }}
         run: |
-          claude --model "\${{ github.event.inputs.model }}" --dangerously-skip-permissions --max-turns 30 -p "
+          claude --model "$MODEL_NAME" --dangerously-skip-permissions --max-turns 30 -p "
           The user wants you to edit their website. Here is their request:
 
-          \${{ github.event.inputs.prompt }}
+          $PROMPT_TEXT
 
           IMPORTANT INSTRUCTIONS:
           1. Read CLAUDE.md first for the site editing rules.
