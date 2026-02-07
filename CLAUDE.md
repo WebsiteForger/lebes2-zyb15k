@@ -19,11 +19,11 @@ their request, no matter how complex.
 ## Tech Stack
 
 - **HTML5** — semantic elements, multiple files OK (index.html, about.html, etc.)
-- **Tailwind CSS** — via CDN (`<script src="https://cdn.tailwindcss.com"></script>`)
+- **Tailwind CSS** — via CDN
 - **Vanilla JavaScript** — for interactivity (tabs, modals, filters, maps, etc.)
-- **Netlify Forms** — add `data-netlify="true"` to forms
+- **Netlify Forms** — add data-netlify="true" to forms
 - **Google Fonts** — via CDN
-- **SVG icons** — inline or from CDN (heroicons, etc.)
+- **SVG icons** — inline or from CDN
 - **Images** — store in images/ folder, optimize with proper alt text
 
 ## When recreating an existing site:
